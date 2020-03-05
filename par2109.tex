@@ -129,7 +129,6 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
     \includegraphics[width=\textwidth]{./data/pi/pi_omp-100000000-1-12-3-weak-boada-3.pdf}
 \end{figure}
 
-%TODO: comentar grafico
 In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads although for 12 it gets 
 
 
@@ -154,11 +153,11 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
     \thead{Version} & $T_1$ & $T_\infty$ & \thead{Parallelism} \\
     \midrule
     seq     & 639780001 &  639780001 & 1 \\ % todas las a seran la misma (o deberían)
-    v1      & 639780001 &  639707001 & c \\ % c = a/b
-    v2      & a & 361190001 & c \\
-    v3      & a & 154438001 & c \\
-    v4      & a & 64102001 & c \\
-    v5      & a & b & c \\
+    v1      & 639780001 &  639707001 & 1.000114115 \\ % c = a/b
+    v2      & 639780001 & 361190001 & 1.771311496 \\
+    v3      & 639780001 & 154438001 & 4.142633269 \\
+    v4      & 639780001 & 64102001 & 9.98065569 \\
+    v5      & 639780001 & b & c \\
     \bottomrule
     \end{tabular}
 \end{table}
