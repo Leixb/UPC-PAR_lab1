@@ -157,12 +157,12 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
     v2      & 639780001 & 361190001 & 1.771311496 \\
     v3      & 639780001 & 154438001 & 4.142633269 \\
     v4      & 639780001 & 64102001 & 9.98065569 \\
-    v5      & 639780001 & b & c \\
+    v5      & 639780001 &  8155001 & 78.452473642 \\
     \bottomrule
     \end{tabular}
 \end{table}
 
-%TODO: completar tabla y sacar conclusiones
+%TODO: sacar conclusiones
 
 %For versions v4 and v5 of 3dfft tar.c perform an analysis of the potential
 %strong scalability that is expected. For that include a plot with the
@@ -173,91 +173,55 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
 %task dependence graphs that are obtained with Tareador.
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 1 processor}%
+    \caption{Execution time of v4 with 1 and 2 processors}%
     \label{fig:plot_v4_01}
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v4_01.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_01.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_02.png}
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 2 processors}%
-    \label{fig:plot_v4_02}
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v4_02.png}
-\end{figure}
-
-\begin{figure}[H]%
-    \caption{Execution time of v4 with 4 processors}%
+    \caption{Execution time of v4 with 4 and 8 processors}%
     \label{fig:plot_v4_04}
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v4_04.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_04.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_08.png}
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 8 processors}%
-    \label{fig:plot_v4_08}
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v4_08.png}
-\end{figure}
-
-\begin{figure}[H]%
-    \caption{Execution time of v4 with 16 processors}%
+    \caption{Execution time of v4 with 16 and 32 processors}%
     \label{fig:plot_v4_16}
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v4_16.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_16.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_32.png}
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 32 processors}%
-    \label{fig:plot_v4_32}
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v4_32.png}
-\end{figure}
-
-\begin{figure}[H]%
-    \caption{Execution time of v5 with 1 processor}%
+    \caption{Execution time of v5 with 1 and 2 processors}%
     \label{fig:plot_v5_01}
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v5_01.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_01.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_02.png}
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v5 with 2 processors}%
-    \label{fig:plot_v5_02}
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v5_02.png}
-\end{figure}
-
-\begin{figure}[H]%
-    \caption{Execution time of v5 with 4 processors}%
+    \caption{Execution time of v5 with 4 and 8 processors}%
     \label{fig:plot_v5_04}
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v5_04.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_04.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_08.png}
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v5 with 8 processors}%
-    \label{fig:plot_v5_08}
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v5_08.png}
-\end{figure}
-
-\begin{figure}[H]%
-    \caption{Execution time of v5 with 16 processors}%
+    \caption{Execution time of v5 with 16 and 32 processors}%
     \label{fig:plot_v5_16}
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v5_16.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_16.png}
+    \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_32.png}
 \end{figure}
 
-\begin{figure}[H]%
-    \caption{Execution time of v5 with 32 processors}%
-    \label{fig:plot_v5_32}
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/plots/v5_32.png}
-\end{figure}
 
 %TODO: comentar graficos
-
 
 %TODO: incluir partes del codigo para entender porque v5 blabla mejor que v4
 
@@ -281,7 +245,7 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
     \toprule
     \thead{Version} & $\phi$ & $S_\infty$ & $T_1$ & $T_8$ & $S_8$ \\
     \midrule
-    initial version in \texttt{3dfft\_omp.c}                & 0.5692 & 2.3211 & 2382.891 ms & 1.469 ms & 1621.58 \\
+    initial version in \texttt{3dfft\_omp.c}                & 0.654085472 & 2.890887542 & 2381399837 ns & 1.469 ms & 1621.58 \\
     new version with improved $\phi$                        & phi & Sinf & t1 & t8 & S8 \\
     final version\footnotemark     & phi & Sinf & t1 & t8 & S8 \\
     \bottomrule
