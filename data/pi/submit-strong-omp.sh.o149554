@@ -1,0 +1,113 @@
+Intel(R) Parallel Studio XE 2018 Update 2 for Linux*
+Copyright (C) 2009-2018 Intel Corporation. All rights reserved.
+make: 'pi_seq' is up to date.
+make: 'pi_omp' is up to date.
+Executing pi_seq sequentially
+Run 0...Elapsed time = 3.94
+Run 1...Elapsed time = 3.94
+Run 2...Elapsed time = 3.94
+ELAPSED TIME MIN OF 3 EXECUTIONS =3.94
+
+pi_omp 1000000000 1 12 3
+Starting OpenMP executions...
+Executing pi_omp with 1 threads
+Run 0...Elapsed time = 3.95
+Run 1...Elapsed time = 3.94
+Run 2...Elapsed time = 3.94
+ELAPSED TIME MIN OF 3 EXECUTIONS =3.94
+
+Executing pi_omp with 2 threads
+Run 0...Elapsed time = 1.98
+Run 1...Elapsed time = 1.98
+Run 2...Elapsed time = 1.98
+ELAPSED TIME MIN OF 3 EXECUTIONS =1.98
+
+Executing pi_omp with 3 threads
+Run 0...Elapsed time = 1.33
+Run 1...Elapsed time = 1.32
+Run 2...Elapsed time = 1.34
+ELAPSED TIME MIN OF 3 EXECUTIONS =1.32
+
+Executing pi_omp with 4 threads
+Run 0...Elapsed time = 1.04
+Run 1...Elapsed time = 1.00
+Run 2...Elapsed time = 1.00
+ELAPSED TIME MIN OF 3 EXECUTIONS =1.00
+
+Executing pi_omp with 5 threads
+Run 0...Elapsed time = 0.84
+Run 1...Elapsed time = 0.84
+Run 2...Elapsed time = 0.84
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.84
+
+Executing pi_omp with 6 threads
+Run 0...Elapsed time = 0.70
+Run 1...Elapsed time = 0.70
+Run 2...Elapsed time = 0.70
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.70
+
+Executing pi_omp with 7 threads
+Run 0...Elapsed time = 0.60
+Run 1...Elapsed time = 0.61
+Run 2...Elapsed time = 0.61
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.60
+
+Executing pi_omp with 8 threads
+Run 0...Elapsed time = 0.54
+Run 1...Elapsed time = 0.62
+Run 2...Elapsed time = 0.53
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.53
+
+Executing pi_omp with 9 threads
+Run 0...Elapsed time = 0.52
+Run 1...Elapsed time = 0.49
+Run 2...Elapsed time = 0.49
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.49
+
+Executing pi_omp with 10 threads
+Run 0...Elapsed time = 0.47
+Run 1...Elapsed time = 0.59
+Run 2...Elapsed time = 0.56
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.47
+
+Executing pi_omp with 11 threads
+Run 0...Elapsed time = 0.42
+Run 1...Elapsed time = 0.42
+Run 2...Elapsed time = 0.56
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.42
+
+Executing pi_omp with 12 threads
+Run 0...Elapsed time = 0.67
+Run 1...Elapsed time = 0.67
+Run 2...Elapsed time = 0.67
+ELAPSED TIME MIN OF 3 EXECUTIONS =0.67
+
+Resultat de l'experiment (tambe es troben a  ./elapsed-boada-2.txt  i  ./speedup-boada-2.txt  )
+#threads	Elapsed min
+1   3.94
+2   1.98
+3   1.32
+4   1.00
+5   0.84
+6   0.70
+7   0.60
+8   0.53
+9   0.49
+10   0.47
+11   0.42
+12   0.67
+
+#threads	Speedup
+1   1.00000000000000000000
+2   1.98989898989898989898
+3   2.98484848484848484848
+4   3.94000000000000000000
+5   4.69047619047619047619
+6   5.62857142857142857142
+7   6.56666666666666666666
+8   7.43396226415094339622
+9   8.04081632653061224489
+10   8.38297872340425531914
+11   9.38095238095238095238
+12   5.88059701492537313432
+
