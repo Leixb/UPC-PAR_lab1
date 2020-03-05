@@ -20,6 +20,10 @@
 
 \begin{document}
 
+
+% https://github.com/carlotacb/PAR-Laboratoris/blob/master/LAB%201/Deliverable.pdf
+
+
 %After the last session for this laboratory assignment, and before starting the
 %next one, you will have to deliver a report in PDF format (other formats will
 %not be accepted) describing the results and conclusions that you have obtained
@@ -33,7 +37,10 @@
 %all components of the group, the identifier of the group (username parXXYY),
 %title of the assignment, date, academic
 
+%TODO: portada con todo lo que dice arriba
+
 \maketitle
+
 
 \section{Node architecture and memory}%
 \label{sec:node_architecture_and_memory}
@@ -42,14 +49,24 @@
 %you should refer to the following table summarising the relevant architectural
 %characteristics of the different node types available:
 
-\begin{table}[htpb]%
+The boada server consists of 8 different nodes with different processors. As we can see in
+the table~\ref{tab:node_arch_and_mem} there are 3 different architectures with slight variations
+\texttt{boada-1 to boada-4} have the same number of sockets(2), cores(6) and threads per core (2), which adds up to a total of 24 threads.
+
+\texttt{boada-5} has the same number of sockets, threads and cores as the previous \texttt{boadas} but with higher Maximum core frequency and a much larger shared cache size and Main memory.
+The output of \texttt{lstopo} also shows us that it has 4 \texttt{GPUs}.
+
+\texttt{boada-6 to boada-8} have 8 cores per socket but only one thread per core (amounting to 16 threads instead of the 24 of the other nodes) and a much lower clock frequency. However it has the
+highest last-level cache size.
+
+\begin{table}[H]%
     \label{tab:node_arch_and_mem}
     \centering
     %\caption{caption}
-    \begin{tabular}{lccc}
+    \begin{tabular}{lrrr}
 
     \toprule
-        & \texttt{boada-1 to boada-4} & \texttt{boada-5} & \texttt{boada-6 to boada-8} \\
+        & \texttt{boada 1 to 4} & \texttt{boada 5} & \texttt{boada 6 to 8} \\
     \midrule
         Number of sockets per node          & 2        & 2        & 2        \\
         Number of cores per socket          & 6        & 6        & 8        \\
@@ -68,39 +85,57 @@
     \end{tabular}
 \end{table}
 
+%TODO: describir la arquitectura de boada
+
 %Also include in the description the architectural diagram for one of the nodes
 %boada-1 to boada-4 as obtained when using the lstopo command. Appropriately
 %comment whatever you consider appropriate.
 
-\begin{figure}%
+\begin{figure}[H]%
     \caption{Architectural diagram for \texttt{boada-1}}%
     \label{fig:arch_boada1}
     \centering
     \includegraphics[width=\textwidth]{./data/map-boada-1.pdf}
 \end{figure}
 
-%TODO
+%TODO: comentar diagrama si es necesario
+
 
 \section{Strong vs.\ weak scalability}%
 \label{sec:strong_vs_weak_scalability}
 
-\begin{figure}%
+%Briefly explain what strong and weak scalability refer to. Exemplify your
+%explanation using the execution time and speed–up plots that you obtained for
+%pi omp.c. Reason about the results obtained.
+
+In strong scalability  the  number  of  threads  is  changed  with  a  fixed  problem  size.   In  this  case parallelism is used to reduce the execution time of the program.
+
+In weak scalability the problem size is proportional to the number of threads. In this case parallelism is used to increase the problem size for which the program is execute
+
+\begin{figure}[H]%
     \caption{Strong scalability}%
     \label{fig:strong}
     \centering
     \includegraphics[width=\textwidth]{./data/pi/pi_omp-1000000000-1-12-3-strong-boada-2.pdf}
 \end{figure}
 
+%TODO: comentar grafico
+In strong scalability, as we can observe in Figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work.
 
-\begin{figure}%
+\begin{figure}[H]%
     \caption{Weak scalability}%
     \label{fig:weak}
     \centering
     \includegraphics[width=\textwidth]{./data/pi/pi_omp-100000000-1-12-3-weak-boada-3.pdf}
 \end{figure}
-%Briefly explain what strong and weak scalability refer to. Exemplify your
-%explanation using the execution time and speed–up plots that you obtained for
-%pi omp.c. Reason about the results obtained.
+
+%TODO: comentar grafico
+In the other hand, in weak scalability (Figure \ref{fig:weak}) the parallel efficiency seems to stay constant decreasing slowly with the number of threads.
+
+%mira whats
+
+%TODO: razonar sobre los resultados obtenidos
+
 
 \section{Analysis of task decompositions for \emph{3DFFT}}%
 \label{sec:analysis_of_task_decompositions_for_3dfft}
@@ -110,7 +145,7 @@
 %with the following table properly filled in with the information obtained in
 %the laboratory session for the initial and different versions generated
 
-\begin{table}[htpb]%
+\begin{table}[H]%
     \label{tab:parallelism}
     \centering
     %\caption{caption}
@@ -118,7 +153,7 @@
     \toprule
     \thead{Version} & $T_1$ & $T_\infty$ & \thead{Parallelism} \\
     \midrule
-    seq     & a & b & c \\
+    seq     & a & b & 1 \\
     v1      & a & b & c \\
     v2      & a & b & c \\
     v3      & a & b & c \\
@@ -128,27 +163,38 @@
     \end{tabular}
 \end{table}
 
+%TODO: completar tabla y sacar conclusiones
+
 %For versions v4 and v5 of 3dfft tar.c perform an analysis of the potential
 %strong scalability that is expected. For that include a plot with the
 %execution time and/or speedup when using 1, 2, 4, 8, 16 and 32 processors, as
 %reported by the simulation module inside Tareador. You should also include the
 %relevant(s) part(s) of the code that help the reader to understand why v5 is
 %able to scale to a higher number of processors compared to v4, capturing the
-%task dependence graphs that are obtained with
+%task dependence graphs that are obtained with Tareador.
 
-\begin{figure}%
+\begin{figure}[H]%
     \caption{Execution time of v5 with 1 processor}%
     \label{fig:plot_v5_01}
     \centering
     \includegraphics[width=\textwidth]{./data/3dfft/plots/v5_01.png}
 \end{figure}
 
-\begin{figure}%
+%TODO: comentar grafico
+
+\begin{figure}[H]%
     \caption{Execution time of v5 with 2 processor}%
     \label{fig:plot_v5_02}
     \centering
     \includegraphics[width=\textwidth]{./data/3dfft/plots/v5_02.png}
 \end{figure}
+
+%TODO: comentar grafico
+
+%TODO: poner el resto de graficos con 4, 8, 16 y 32 procesadores.
+
+%TODO: incluir partes del codigo para entender porque v5 blabla mejor que v4
+
 
 \section{Understanding the parallel execution of \emph{3DFFT}}%
 \label{sec:understanding_the_parallel_execution_of_3dfft}
@@ -158,13 +204,14 @@
 %parallel versions of 3DFFT. Support your explanations with the results reported
 %in the following table which you obtained during the laboratory session. It is
 %very important that you include the relevant Paraver captures (timelines and
-%profiles of the % of time
+%profiles of the % of time spent in the differentOpenMPstates) to support your
+%explanations too.
 
-\begin{table}[htpb]%
+\begin{table}[H]%
     \label{tab:under_parallelism}
     \centering
     %\caption{caption}
-    \begin{tabular}{lcc@{\hskip 2em}ccc}
+    \begin{tabular}{lrr@{\hskip 2em}rrr}
     \toprule
     \thead{Version} & $\phi$ & $S_\infty$ & $T_1$ & $T_8$ & $S_8$ \\
     \midrule
@@ -175,8 +222,17 @@
     \end{tabular}
 \end{table}
 
+%TODO: completar tabla
+
+%TODO: incluir capturas de Paraver
+
+%TODO: comment about how did you observed with Paraver the parallel 
+%      performance evolution for the OpenMP parallel versions of 3DFFT.
+
 %Finally you should comment about the (strong) scalability plots (execution time
 %and speed–up) that are obtained when varying the number of threads for the
 %three parallel versions that you have analysed.
+
+%TODO: incluir plots y comentarlos
 
 \end{document}
