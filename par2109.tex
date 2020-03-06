@@ -162,10 +162,10 @@ In weak scalability the problem size is proportional to the number of threads. I
 \end{minipage}
 \end{figure}
 
-In strong scalability, as we can observe in figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work or the overhead of creating the threads starts to out-weight its benefits
+In strong scalability, as we can observe in figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work or the overhead of creating the threads starts to out-weight its benefits.
 
 
-%TODO: finish this
+%TODO: finish this <-- ESTO LO HAS PUESTO TU, YA ESTA?
 %TODO: razonar sobre los resultados obtenidos
 
 Similarly, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads. Although the parallel efficiency increases again at 12 threads,
@@ -199,6 +199,8 @@ its still significantly lower that the value of 10 threads.
 \end{table}
 
 %TODO: sacar conclusiones
+
+La tabla~\ref{tab:parallelism} nos muestra que la primera versión no afecta mucho
 
 %For versions v4 and v5 of 3dfft tar.c perform an analysis of the potential
 %strong scalability that is expected. For that include a plot with the
@@ -332,7 +334,7 @@ the tasks of \emph{v5} are in a more inner part of the nested for loops (althoug
 %very important that you include the relevant Paraver captures (timelines and
 %profiles of the % of time spent in the differentOpenMPstates) to support your
 %explanations too.
-% aunque tampoco se que hacer <--- BUSCA TODO:
+
 \begin{table}[H]%
     \label{tab:under_parallelism}
     \centering
@@ -379,6 +381,7 @@ the tasks of \emph{v5} are in a more inner part of the nested for loops (althoug
 
 %TODO: comment about how did you observed with Paraver the parallel 
 %      performance evolution for the OpenMP parallel versions of 3DFFT.
+% NO SE A QUE COÑO SE REFIERE GONZALEZ NO HABLA NADA DE ESTO
 
 %Finally you should comment about the (strong) scalability plots (execution time
 %and speed–up) that are obtained when varying the number of threads for the
@@ -386,25 +389,35 @@ the tasks of \emph{v5} are in a more inner part of the nested for loops (althoug
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/3dfft_omp-strong-1.pdf}
+    \includegraphics[width=0.4\textwidth]{./data/3dfft_/3dfft_omp-strong-1.pdf}
     \caption{Strong scalability of the initial version}%
     \label{fig:omp1-plot}
 \end{figure}
 
-\begin{figure}[H]%
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/3dfft_omp-strong-2.pdf}
-    \caption{Strong scalability of the improved version}%
-    \label{fig:omp2-plot}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.4\textwidth]{./data/3dfft_/3dfft_omp-strong-2.pdf}
+  \caption{Strong scalability of the improved version}%
+  \label{fig:omp2-plot}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.4\textwidth]{./data/3dfft_/3dfft_omp-strong-3.pdf}
+  \caption{Strong scalability of the final version}%
+  \label{fig:omp3-plot}
+\end{minipage}
 \end{figure}
 
-\begin{figure}[H]%
-    \centering
-    \includegraphics[width=\textwidth]{./data/3dfft_/3dfft_omp-strong-3.pdf}
-    \caption{Strong scalability of the final version}%
-    \label{fig:omp3-plot}
-\end{figure}
+We can see that for the initial version in figure~\ref{fig:omp1-plot} there is no difference in execution time 
+after 4 threads and the speed-up is really low and far from the ideal value.
 
-%TODO: comentar los plots
+The second version (figure~\ref{fig:omp2-plot}) has lower execution
+time than the first one but again, there is no noticeable difference from 6 threads on-wards, in the speed-up plot we can really see an improvement, we can therefore conclude that allowing the parallelization of the function \texttt{init\_complex\_grid} function had a great impact on $\phi$.
+
+In the final version
+shown in figure~\ref{fig:omp3-plot} we can see a much better speed-up without much overhead although it starts to
+fall off at 8 threads with a big dip in 11 threads.
 
 \end{document}
