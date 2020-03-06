@@ -65,9 +65,7 @@ The output of \texttt{lstopo} also shows us that it has 4 \texttt{GPUs}.
 highest last-level cache size.
 
 \begin{table}[H]%
-    \label{tab:node_arch_and_mem}
     \centering
-    %\caption{caption}
     \begin{tabular}{lrrr}
 
     \toprule
@@ -88,6 +86,9 @@ highest last-level cache size.
     \bottomrule
 
     \end{tabular}
+    
+    \caption{Architecture of boada nodes}%
+    \label{tab:node_arch_and_mem}
 \end{table}
 
 %Also include in the description the architectural diagram for one of the nodes
@@ -99,10 +100,10 @@ to \texttt{boada-1}. The cache L3 is shared between the cores of each socket.
  while the others are local to each core. There is no shared memory between the sockets.
 
 \begin{figure}[H]%
-    \caption{Architectural diagram for \texttt{boada-1}}%
-    \label{fig:arch_boada1}
     \centering
     \includegraphics[width=\textwidth]{./data/map-boada-1.pdf}
+    \caption{Architectural diagram for \texttt{boada-1}}%
+    \label{fig:arch_boada1}
 \end{figure}
 
 
@@ -136,11 +137,10 @@ In weak scalability the problem size is proportional to the number of threads. I
 In strong scalability, as we can observe in figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work.
 
 
-In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads although for 12 it gets 
-
-
-
+%TODO: finish this
 %TODO: razonar sobre los resultados obtenidos
+
+%In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads although for 12 it gets 
 
 
 \section{Analysis of task decompositions for \emph{3DFFT}}%
@@ -152,21 +152,21 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
 %the laboratory session for the initial and different versions generated
 
 \begin{table}[H]%
-    \label{tab:parallelism}
     \centering
-    %\caption{caption}
-    \begin{tabular}{cccc}
+    \begin{tabular}{crrr}
     \toprule
-    \thead{Version} & $T_1$ & $T_\infty$ & \thead{Parallelism} \\
+    \thead{Version} & $T_1$ \hspace{1.5em} & $T_\infty$ \hspace{1.5em} & \thead{Parallelism} \\
     \midrule
-    seq     & 639780001 &  639780001 & 1 \\ % todas las a seran la misma (o deberían)
-    v1      & 639780001 &  639707001 & 1.000114115 \\ % c = a/b
-    v2      & 639780001 & 361190001 & 1.771311496 \\
-    v3      & 639780001 & 154438001 & 4.142633269 \\
-    v4      & 639780001 & 64102001 & 9.98065569 \\
-    v5      & 639780001 &  8155001 & 78.452473642 \\
+    seq     & 639 780 001 &  639 780 001 & 1 \\ % todas las a seran la misma (o deberían)
+    v1      & 639 780 001 &  639 707 001 & 1.000 114 115 \\ % c = a/b
+    v2      & 639 780 001 &  361 190 001 & 1.771 311 496 \\
+    v3      & 639 780 001 &  154 438 001 & 4.142 633 269 \\
+    v4      & 639 780 001 &   64 102 001 & 9.980 655 690 \\
+    v5      & 639 780 001 &    8 155 001 & 78.452 473 642 \\
     \bottomrule
     \end{tabular}
+    \caption{Parallelism for different \texttt{3dfft} versions}
+    \label{tab:parallelism}
 \end{table}
 
 %TODO: sacar conclusiones
@@ -212,51 +212,58 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 1 and 2 processors}%
+    \label{fig:diff}
+    \centering
+    \includegraphics[width=\textwidth]{./data/3dfft_/plots/diff.png}
+    \caption{Differences between v4 and v5}%
+\end{figure}
+
+\begin{figure}[H]%
     \label{fig:plot_v4_01}
     \centering
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_01.png}
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_02.png}
+    \caption{Execution time of v4 with 1 and 2 processors}%
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 4 and 8 processors}%
     \label{fig:plot_v4_04}
     \centering
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_04.png}
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_08.png}
+    \caption{Execution time of v4 with 4 and 8 processors}%
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v4 with 16 and 32 processors}%
     \label{fig:plot_v4_16}
     \centering
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_16.png}
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v4_32.png}
+    \caption{Execution time of v4 with 16 and 32 processors}%
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v5 with 1 and 2 processors}%
-    \label{fig:plot_v5_01}
     \centering
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_01.png}
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_02.png}
+    \caption{Execution time of v5 with 1 and 2 processors}%
+    \label{fig:plot_v5_01}
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v5 with 4 and 8 processors}%
     \label{fig:plot_v5_04}
     \centering
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_04.png}
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_08.png}
+    \caption{Execution time of v5 with 4 and 8 processors}%
 \end{figure}
 
 \begin{figure}[H]%
-    \caption{Execution time of v5 with 16 and 32 processors}%
     \label{fig:plot_v5_16}
     \centering
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_16.png}
     \includegraphics[width=0.49\textwidth]{./data/3dfft_/plots/v5_32.png}
+    \caption{Execution time of v5 with 16 and 32 processors}%
 \end{figure}
 
 
@@ -285,7 +292,7 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
     \thead{Version} & $\phi$ & $S_\infty$ & $T_1$ & $T_8$ & $S_8$ \\
     \midrule
     initial version in \texttt{3dfft\_omp.c}                & 0.654085472 & 2.890887542 & 2381399837 ns & 1363188472 ns & 1.746933668 \\
-    new version with improved $\phi$                        & phi & Sinf & t1 & t8 & S8 \\
+    new version with improved $\phi$                        & phi & Sinf & 2363107437 ns & t8 & S8 \\
     final version\footnotemark     & phi & Sinf & t1 & t8 & S8 \\
     \bottomrule
     \end{tabular}
