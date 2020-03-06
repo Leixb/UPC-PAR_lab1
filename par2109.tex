@@ -5,6 +5,11 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 
+\usepackage{siunitx}
+%bien el siunitx? XD
+% puedo hacer algo? esk me siento inutil
+% el ultimo apartado es tope raro
+
 \renewcommand\theadfont{\bfseries}
 
 \title{
@@ -24,8 +29,35 @@
 
 \begin{document}
 
-% https://github.com/carlotacb/PAR-Laboratoris/blob/master/LAB%201/Deliverable.pdf
+\thispagestyle{empty}
+\clearpage
+\setcounter{page}{-1}
 
+\begin{titlepage}
+{
+    \centering
+    \null
+    \vfill
+    {\Huge \bfseries PAR Laboratory Assignment\par}
+    \vspace{3em}
+    {\Large {\scshape Lab 1:} Experimental setup and tools\par}
+    \vfill
+\begin{center}
+\end{center}
+    \vspace{3cm}
+
+    \vfill
+    {\raggedleft \Large
+        Aleix Boné\\
+        Alex Herrero\\
+        {\bfseries\ttfamily par2109}\\
+        \vspace{4em}
+        2020-03-06
+        \par}
+}
+\end{titlepage}
+
+\pagebreak
 
 %After the last session for this laboratory assignment, and before starting the
 %next one, you will have to deliver a report in PDF format (other formats will
@@ -40,7 +72,6 @@
 %all components of the group, the identifier of the group (username parXXYY),
 %title of the assignment, date, academic
 
-\maketitle
 
 \pagebreak
 \tableofcontents
@@ -134,13 +165,14 @@ In weak scalability the problem size is proportional to the number of threads. I
 \end{minipage}
 \end{figure}
 
-In strong scalability, as we can observe in figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work.
+In strong scalability, as we can observe in figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work or the overhead of creating the threads starts to out-weight its benefits
 
 
 %TODO: finish this
 %TODO: razonar sobre los resultados obtenidos
 
-%In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads although for 12 it gets 
+Similarly, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads. Although the parallel efficiency increases again at 12 threads,
+its still significantly lower that the value of 10 threads.
 
 
 \section{Analysis of task decompositions for \emph{3DFFT}}%
@@ -153,15 +185,15 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
 
 \begin{table}[H]%
     \centering
-    \begin{tabular}{crrr}
+    \begin{tabular}{cS[table-format=9.]S[table-format=9.]S[table-format=2.9]}
     \toprule
-    \thead{Version} & $T_1$ \hspace{1.5em} & $T_\infty$ \hspace{1.5em} & \thead{Parallelism} \\
+    \thead{Version} & {$T_1$} & {$T_\infty$} & {\thead{Parallelism}} \\
     \midrule
     seq     & 639 780 001 &  639 780 001 & 1 \\ % todas las a seran la misma (o deberían)
     v1      & 639 780 001 &  639 707 001 & 1.000 114 115 \\ % c = a/b
     v2      & 639 780 001 &  361 190 001 & 1.771 311 496 \\
     v3      & 639 780 001 &  154 438 001 & 4.142 633 269 \\
-    v4      & 639 780 001 &   64 102 001 & 9.980 655 690 \\
+    v4      & 639 780 001 &   64 102 001 & 9.980 655 69 \\
     v5      & 639 780 001 &    8 155 001 & 78.452 473 642 \\
     \bottomrule
     \end{tabular}
@@ -179,6 +211,13 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
 %able to scale to a higher number of processors compared to v4, capturing the
 %task dependence graphs that are obtained with Tareador.
 
+Figures~\ref{fig:exec_v4} and \ref{fig:exec_v5} show the change in execution time
+with the number of processors. Since its difficult to appreciate the differences with a
+linear scale, we have included figures~\ref{fig:exec_v4_log} and \ref{fig:exec_v5_log} with
+a logarithmic scale to show how the execution time of \emph{v5} decreases from 16 to 32 processors
+and \emph{v4} does not, meaning that \emph{v5} can be further parallelized while we have reached a limit
+with \emph{v4}.
+
 \begin{figure}[H]
 \centering
 \begin{minipage}{.5\textwidth}
@@ -194,6 +233,7 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
   \label{fig:exec_v5}
 \end{minipage}
 \end{figure}
+
 
 \begin{figure}[H]
 \centering
@@ -211,24 +251,29 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
 \end{minipage}
 \end{figure}
 
+The task dependency graphs for \emph{v4} (figure~\ref{fig:depen_v4}) and \emph{v5} (figure~\ref{fig:depen_v5}) illustrate that \emph{v5} has much more fine grained tasks that can be parallelized as opposed to \emph{v4}.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=0.3\textwidth]{data/3dfft_/plots/dependency_graph_v4.pdf.png}
+    \caption{Dependency graph v4}%
+    \label{fig:depen_v4}
+\end{figure}
 \begin{figure}[H]%
     \centering
     \includegraphics[width=\textwidth]{data/3dfft_/plots/cap.png}
     \caption{Dependency graph v5}%
     \label{fig:depen_v5}
 \end{figure}
-\begin{figure}[H]%
-    \centering
-    \includegraphics[width=0.6\textwidth]{data/3dfft_/plots/dependency_graph_v4.pdf.png}
-    \caption{Dependency graph v4}%
-    \label{fig:depen_v4}
-\end{figure}
+
+Figure~\ref{fig:diff} shows a portion of the differences between \emph{v4} and \emph{v5}. As we can see
+the tasks of \emph{v5} are in a more inner part of the nested for loops (although not the deepest, there is 1 extra level we cold have tried), this means that \emph{v5} can have \emph{N} times more tasks than \emph{v4} for those methods, allowing for much higher parallelization as we have seen in figures~\ref{fig:exec_v4}-\ref{fig:exec_v5_log}.
 
 \begin{figure}[H]%
-    \label{fig:diff}
     \centering
     \includegraphics[width=\textwidth]{./data/3dfft_/plots/diff.png}
     \caption{Differences between v4 and v5}%
+    \label{fig:diff}
 \end{figure}
 
 \begin{figure}[H]%
@@ -280,11 +325,6 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
 \end{figure}
 
 
-%TODO: comentar graficos
-
-%TODO: incluir partes del codigo para entender porque v5 blabla mejor que v4
-
-
 \section{Understanding the parallel execution of \emph{3DFFT}}%
 \label{sec:understanding_the_parallel_execution_of_3dfft}
 
@@ -300,21 +340,27 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
     \label{tab:under_parallelism}
     \centering
     %\caption{caption}
-    \begin{tabular}{lrr@{\hskip 2em}rrr}
+    \begin{tabular}{l
+        S[table-format=1.4,round-mode=places,round-precision=4]
+        S[table-format=1.4,round-mode=places,round-precision=4]
+        @{\hskip 2em}
+        S[table-format=10.0,round-mode=places,round-precision=4]
+        S[table-format=10.0,round-mode=places,round-precision=4]
+        S[table-format=1.4,round-mode=places,round-precision=4]
+        }
     \toprule
-    \thead{Version} & $\phi$ & $S_\infty$ & $T_1$ & $T_8$ & $S_8$ \\
+    \thead{Version} & {$\phi$} & {$S_\infty$} & {$T_1$ (ns)} & {$T_8$ (ns)} & {$S_8$} \\
     \midrule
-    initial version in \texttt{3dfft\_omp.c}                & 0.654085472 & 2.890887542 & 2381399837 ns & 1363188472 ns & 1.746933668 \\
-    new version with improved $\phi$                        & 0.891588591 & Sinf & 2363107437 ns & t8 & S8 \\
-    final version\footnotemark     & phi & Sinf & t1 & t8 & S8 \\
+    initial version in \texttt{3dfft\_omp.c}                & 0.618754621 & 2.623294858 & 2519853052 & 1710690423 & 1.473003542 \\
+    new version with improved $\phi$                        & 0.890828288 & 9.159881997 & 2365124299 & 955055104 & 2.47431528 \\
+    final version\footnotemark     & 0.903348138 & 10.346412184 & 2401885497 & 626806635 & 3.831940128 \\
     \bottomrule
     \end{tabular}
 \end{table}
 \footnotetext{with reduced parallelization overheads}
 
-%TODO: completar tabla
-
 %TODO: incluir capturas de Paraver
+
 
 %TODO: comment about how did you observed with Paraver the parallel 
 %      performance evolution for the OpenMP parallel versions of 3DFFT.
