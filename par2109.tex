@@ -212,6 +212,19 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
 \end{figure}
 
 \begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{data/3dfft_/plots/cap.png}
+    \caption{Dependency graph v5}%
+    \label{fig:depen_v5}
+\end{figure}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=0.6\textwidth]{data/3dfft_/plots/dependency_graph_v4.pdf.png}
+    \caption{Dependency graph v4}%
+    \label{fig:depen_v4}
+\end{figure}
+
+\begin{figure}[H]%
     \label{fig:diff}
     \centering
     \includegraphics[width=\textwidth]{./data/3dfft_/plots/diff.png}
@@ -292,7 +305,7 @@ In strong scalability, as we can observe in figure~\ref{fig:strong}, time decrea
     \thead{Version} & $\phi$ & $S_\infty$ & $T_1$ & $T_8$ & $S_8$ \\
     \midrule
     initial version in \texttt{3dfft\_omp.c}                & 0.654085472 & 2.890887542 & 2381399837 ns & 1363188472 ns & 1.746933668 \\
-    new version with improved $\phi$                        & phi & Sinf & 2363107437 ns & t8 & S8 \\
+    new version with improved $\phi$                        & 0.891588591 & Sinf & 2363107437 ns & t8 & S8 \\
     final version\footnotemark     & phi & Sinf & t1 & t8 & S8 \\
     \bottomrule
     \end{tabular}
