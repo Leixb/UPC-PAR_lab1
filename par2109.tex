@@ -1,6 +1,10 @@
 % vim: spell:spelllang=en:
 \input{preamble}
 
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+
 \renewcommand\theadfont{\bfseries}
 
 \title{
@@ -113,21 +117,24 @@ In strong scalability  the  number  of  threads  is  changed  with  a  fixed  pr
 
 In weak scalability the problem size is proportional to the number of threads. In this case parallelism is used to increase the problem size for which the program is execute
 
-\begin{figure}[H]%
-    \caption{Strong scalability}%
-    \label{fig:strong}
-    \centering
-    \includegraphics[width=\textwidth]{./data/pi/pi_omp-1000000000-1-12-3-strong-boada-2.pdf}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.7\linewidth]{./data/pi/pi_omp-1000000000-1-12-3-strong-boada-2.pdf}
+  \captionof{figure}{Strong scalability}
+  \label{fig:strong}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.7\linewidth]{./data/pi/pi_omp-100000000-1-12-3-weak-boada-3.pdf}
+  \captionof{figure}{Weak scalability}
+  \label{fig:weak}
+\end{minipage}
 \end{figure}
 
 In strong scalability, as we can observe in figure~\ref{fig:strong}, time decreases as we increase the number of threads and therefore the speedup almost increases linearly. Except in the case we use 12 threads that time and speedup increase because there are threads without doing useful work.
 
-\begin{figure}[H]%
-    \caption{Weak scalability}%
-    \label{fig:weak}
-    \centering
-    \includegraphics[width=\textwidth]{./data/pi/pi_omp-100000000-1-12-3-weak-boada-3.pdf}
-\end{figure}
 
 In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that the parallel efficiency remains close to the ideal vale of 1 slowly decreasing and dips at 11 threads although for 12 it gets 
 
@@ -171,6 +178,38 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
 %relevant(s) part(s) of the code that help the reader to understand why v5 is
 %able to scale to a higher number of processors compared to v4, capturing the
 %task dependence graphs that are obtained with Tareador.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./data/execution_v4.pdf}
+  \captionof{figure}{Execution time of v4}
+  \label{fig:exec_v4}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./data/execution_v5.pdf}
+  \captionof{figure}{Execution time of v5}
+  \label{fig:exec_v5}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./data/execution_v4_log.pdf}
+  \captionof{figure}{Execution time of v4 (log scale)}
+  \label{fig:exec_v4_log}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{./data/execution_v5_log.pdf}
+  \captionof{figure}{Execution time of v5 (log scale)}
+  \label{fig:exec_v5_log}
+\end{minipage}
+\end{figure}
 
 \begin{figure}[H]%
     \caption{Execution time of v4 with 1 and 2 processors}%
@@ -245,7 +284,7 @@ In the other hand, in weak scalability (figure~\ref{fig:weak}) we can see that t
     \toprule
     \thead{Version} & $\phi$ & $S_\infty$ & $T_1$ & $T_8$ & $S_8$ \\
     \midrule
-    initial version in \texttt{3dfft\_omp.c}                & 0.654085472 & 2.890887542 & 2381399837 ns & 1.469 ms & 1621.58 \\
+    initial version in \texttt{3dfft\_omp.c}                & 0.654085472 & 2.890887542 & 2381399837 ns & 1363188472 ns & 1.746933668 \\
     new version with improved $\phi$                        & phi & Sinf & t1 & t8 & S8 \\
     final version\footnotemark     & phi & Sinf & t1 & t8 & S8 \\
     \bottomrule
