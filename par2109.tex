@@ -6,9 +6,6 @@
 \usepackage{graphicx}
 
 \usepackage{siunitx}
-%bien el siunitx? XD
-% puedo hacer algo? esk me siento inutil
-% el ultimo apartado es tope raro
 
 \renewcommand\theadfont{\bfseries}
 
@@ -335,18 +332,18 @@ the tasks of \emph{v5} are in a more inner part of the nested for loops (althoug
 %very important that you include the relevant Paraver captures (timelines and
 %profiles of the % of time spent in the differentOpenMPstates) to support your
 %explanations too.
-
+% aunque tampoco se que hacer <--- BUSCA TODO:
 \begin{table}[H]%
     \label{tab:under_parallelism}
     \centering
     %\caption{caption}
     \begin{tabular}{l
-        S[table-format=1.4,round-mode=places,round-precision=4]
-        S[table-format=1.4,round-mode=places,round-precision=4]
+        S[table-format=1.3,round-mode=places,round-precision=3]
+        S[table-format=2.3,round-mode=places,round-precision=3]
         @{\hskip 2em}
-        S[table-format=10.0,round-mode=places,round-precision=4]
-        S[table-format=10.0,round-mode=places,round-precision=4]
-        S[table-format=1.4,round-mode=places,round-precision=4]
+        S[table-format=10.0,round-mode=places,round-precision=3]
+        S[table-format=10.0,round-mode=places,round-precision=3]
+        S[table-format=1.3,round-mode=places,round-precision=3]
         }
     \toprule
     \thead{Version} & {$\phi$} & {$S_\infty$} & {$T_1$ (ns)} & {$T_8$ (ns)} & {$S_8$} \\
@@ -359,8 +356,26 @@ the tasks of \emph{v5} are in a more inner part of the nested for loops (althoug
 \end{table}
 \footnotetext{with reduced parallelization overheads}
 
-%TODO: incluir capturas de Paraver
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{./data/omp1.jpeg}
+    \caption{2DAnalyzer window of the initial version with the parallel functions cfg}%
+    \label{fig:omp1}
+\end{figure}
 
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{./data/omp2.jpeg}
+    \caption{2DAnalyzer window of the improved version with the parallel functions cfg}%
+    \label{fig:omp2}
+\end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{./data/omp3.jpeg}
+    \caption{2DAnalyzer window of the final version with the parallel functions cfg}%
+    \label{fig:omp3}
+\end{figure}
 
 %TODO: comment about how did you observed with Paraver the parallel 
 %      performance evolution for the OpenMP parallel versions of 3DFFT.
@@ -369,6 +384,27 @@ the tasks of \emph{v5} are in a more inner part of the nested for loops (althoug
 %and speed–up) that are obtained when varying the number of threads for the
 %three parallel versions that you have analysed.
 
-%TODO: incluir plots y comentarlos
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{./data/3dfft_/3dfft_omp-strong-1.pdf}
+    \caption{Strong scalability of the initial version}%
+    \label{fig:omp1-plot}
+\end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{./data/3dfft_/3dfft_omp-strong-2.pdf}
+    \caption{Strong scalability of the improved version}%
+    \label{fig:omp2-plot}
+\end{figure}
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=\textwidth]{./data/3dfft_/3dfft_omp-strong-3.pdf}
+    \caption{Strong scalability of the final version}%
+    \label{fig:omp3-plot}
+\end{figure}
+
+%TODO: comentar los plots
 
 \end{document}
